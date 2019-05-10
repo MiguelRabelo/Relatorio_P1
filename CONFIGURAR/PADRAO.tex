@@ -1,0 +1,125 @@
+\documentclass[a4paper,12pt]{article}  % Seu arquivo fonte precisa conter %report
+
+\usepackage[a4paper,left=2.75cm,right=2cm,top=2.5cm,bottom=2.0cm]{geometry} %Ajustar margens
+
+%% ADICIONAR PACOTES
+\usepackage[brazil]{babel}		% Traduzir para português
+\usepackage[utf8]{inputenc} 	% Usar acentos normalmente
+\usepackage{indentfirst}		% Dar espaçamento de Parágrafos na primeira linha
+\usepackage{pslatex}			% Algum ajuste da fonte
+\usepackage{fancyhdr}			% Ajustar cabeçalho e rodapé
+
+\usepackage{dblfloatfix}		%Conseta erros de alinhamento  multi-colunas e subfiguras
+%\usepackage{fixltx2e} %Está obsoleto???
+\usepackage{multicol}			%Para configurações de multicolunas
+\usepackage{scrextend}			%Permite ajustar margens nas figuras
+\usepackage{setspace}			% Espaçamento entre linhas
+\usepackage{titlesec}			% Espaço entre títulos
+\usepackage[tocflat]{tocstyle}
+%\usepackage{titletoc}
+  
+%\usepackage{color}
+\usepackage[table,xcdraw]{xcolor}% Adicionar cores: Ao texto, fundo e páginas
+\usepackage{colortbl}			 % Ajustar as cores nas tabelas
+
+\usepackage[hidelinks]{hyperref} % Para linkar as referencias
+\usepackage[hypcap]{caption} 	 % Para linkar os hiperlinks a lengend
+\usepackage[normalem]{ulem} 	 % Mudar enfase: italico ou negrito na referencia
+\usepackage{subcaption} 		 % Para colar as sublegendas em floats
+
+\usepackage{float}				 % Costumizar ambientes float
+%\usepackage{placeins} %isso é necessário?
+\usepackage[pdftex]{graphicx} 	 % Incluir figuras 
+\usepackage{longtable} 			 % Para talebas longas, mais de uma página 
+\usepackage{tabulary}			 % Ajustar tabelas de acordo com as margens
+\usepackage{amsmath} 			 % Para comendos das equações
+
+\usepackage{cite} 				 % Para as referências
+%\usepackage{natbib} 			 % Para ajustar as citações
+\usepackage{url} 				 % Para citar links
+%\usepackage{authordate1-4} 
+%\usepackage{times}
+\usepackage{verbatim}			 % Ambiente que o latex não entende como latex
+\usepackage[alf]{abntex2cite}
+
+
+%CONFIGURAR ESPAÇAMENTOS
+\setlength{\parindent}{28pt}	% Espaçamento de ínicio Paragráfos
+\setlength{\parskip}{0pt} %Espaçamento entre paragrafos
+%\onehalfspacing %Espaçamento entre linha: 1,5
+\doublespacing %espaçamento duplo
+\titlespacing{\section}{\parindent}{6pt}{12pt}%{esquerda}{antes}{depois}
+\titlespacing{\subsection}{\parindent}{0pt}{0pt}%{esquerda}{antes}{depois}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}%{esquerda}{antes}{depois}
+
+%CONFIGURAR LEGENDAS
+\captionsetup{labelfont={bf, small},textfont={bf, small}, labelsep=endash}	
+\numberwithin{equation}{section}
+\numberwithin{figure}{subsection}
+\numberwithin{table}{subsection}
+
+%CONFIGURAR CORES
+\definecolor{tabela_titulo}{HTML}{3CB375}  %{4B0082} 
+\definecolor{tabela_par} {HTML}{E3F6CE}    %{HTML}{D8BFD8} 
+\definecolor{tabela_impar}{HTML}{FFFFFF}   %{F5FFFA}
+\definecolor{destaque}{RGB}{226,239,217} 
+\definecolor{texto_titulo}{RGB}{0,0,0}     %{HTML}{F5FFFA}%   
+
+%CONFIGURAR COMANDOS
+\newcommand{\Destacarlinha}{\rowcolor{tabela_titulo} \bf}
+\newcommand{\Destacar}{\cellcolor{tabela_titulo}\color{texto_titulo} \textbf}
+\newcommand{\verde}{\cellcolor{tabela_par}\color{texto_titulo}}
+\newcommand{\branco}{\cellcolor{tabela_impar}\color{texto_titulo}}
+\newcommand{\Alternarcores}{\rowcolors{1}{tabela_impar}{tabela_par}}
+
+%CONFIGURAR AMBIENTES
+\let\oldtable\table
+\let\endoldtable\endtable
+\renewenvironment{table}{ \oldtable [H] \centering  \Alternarcores}{\endoldtable}
+
+%\let\oldlongtable\longtable
+%\let\endoldlongtable\endlongtable
+%\renewenvironment{longtable}{ \oldlongtable }{\endoldlongtable}
+
+\let\oldtabulary\tabulary
+\let\endoldtabulary\endtabulary
+\renewenvironment{tabulary}{\oldtabulary{\textwidth} }{\endoldtabulary}
+
+\let\oldfigure\figure
+\let\endoldfigure\endfigure
+\renewenvironment{figure}{\oldfigure[H] \centering }{\endoldfigure}
+
+%Ajustar sumário
+\usetocstyle{standard} %Negrito nos títulos principais
+\setcounter{tocdepth}{2} %0 - part; 1-section;2-subsection;3-subsubsection...
+\newcommand{\sumario}{\tableofcontents \thispagestyle{empty} \setcounter{page}{1} \pagebreak} %Ajustar paginação
+
+%CONFIGURAR BIBLIOGRAFIA
+%\usepackage{}
+%\bibliographystyle[num]{abntex2} %{abstract}
+
+%\begin{comment}
+%	ieeetr é numerica, ordem que aparece no texto
+%	usar apalike (autor e data) com o cite = [auto, ano], com o natbib = autor (ano) e com a author-date = (autor, ano)
+%	abstract com o cite = [referencia], com o author-date = (referencia)
+%	obs: colocar \citeauthor para citar FAR ou CS-VLA
+%\end{comment}
+
+%% CONFIGURAR CABEÇALHO E RODAPÉ
+\pagestyle{fancy} %estilo fancy
+
+\lhead{\begin{addmargin}[-2.5cm]{-3cm}\vspace{-10mm} \includegraphics[height = 20 mm]{CONFIGURAR/logoaero.png} \end{addmargin}}%\includegraphics[scale=0.2]{logoufpe.png}} % esquerda do cabeçalho
+%\chead{} %centro do cabeçalho
+\rhead{\begin{addmargin}[18.3cm]{-2 cm}\vspace{- 10mm}\includegraphics[height =20 mm]{CONFIGURAR/logoufpe.png}\end{addmargin}}%AERODINÂMICA} % direita do cabeçalho
+\lfoot{} %esquerda do rodapé
+\cfoot{} %centro do rodapé
+\rfoot{\vspace{-1 cm}\thepage} %direita do rodapé
+\renewcommand{\headrulewidth}{0pt}  
+%\renewcommand{\footrulewidth}{1pt}
+
+%% CONFIGURAR CAPA
+%\begin{comment}  CAPA:
+\newcommand{\capa}{\thispagestyle{empty}
+\begin{figure*}[htp] \begin{addmargin}[-2.75cm]{-2 cm}  \vspace{-2.5cm}
+\includegraphics[width= \paperwidth, height = \paperheight]{CONFIGURAR/capa.png}
+\end{addmargin} \end{figure*} \clearpage}
